@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: applicationsettests
+  namespace: openshift-gitops
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - git:
+      repoURL: https://github.com/argoproj/argo-cd.git
+      revision: HEAD
+      files:
+      - path: "target/*.json"
+  template:
+    metadata:
+      name: '{{.applicationName}}-guestbook'
+    spec:
+      project: default
+      source:
+        chart: my-hello
+        repoURL: https://cloudecho.github.io/charts/
+        targetRevision: '{{.targetRevision}}'
+        helm:
+          releaseName: 'my-hello-{{.targetRevision}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: default
