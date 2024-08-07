@@ -23,7 +23,7 @@ spec:
         repoURL: registry-1.docker.io/bitnamicharts
         targetRevision: '{{.targetRevision}}'
         helm:
-          releaseName: 'my-hello-{{.targetRevision}}'
+          releaseName: '{{.applicationName}}-guestbook'
       destination:
         server: https://kubernetes.default.svc
         namespace: default
