@@ -19,8 +19,8 @@ spec:
     spec:
       project: default
       source:
-        chart: my-hello
-        repoURL: https://cloudecho.github.io/charts/
+        chart: apache
+        repoURL: registry-1.docker.io/bitnamicharts
         targetRevision: '{{.targetRevision}}'
         helm:
           releaseName: 'my-hello-{{.targetRevision}}'
